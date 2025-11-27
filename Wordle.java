@@ -41,14 +41,11 @@ public class Wordle {
         for (int i = 0; i < guess.length(); i++) {
             if (guess.charAt(i) == secret.charAt(i)) {
                 resultRow[i] = 'G';
-                i++;
             }
-            if (containsChar(secret, guess.charAt(i)) == true) {
-                resultRow[i] = 'G';
-                i++;
+            if (containsChar(secret, guess.charAt(i)) == true && resultRow[i] != 'G') {
+                resultRow[i] = 'Y';
             } else {
                 resultRow[i] = '_';
-                i++;
             }
         }
 		// ...
