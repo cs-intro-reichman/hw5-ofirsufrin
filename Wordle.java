@@ -49,11 +49,14 @@ public class Wordle {
         for (int i = 0; i < guess.length(); i++) {
             if (containsChar(secret, guess.charAt(i)) == true && used[i] == false) {
                 resultRow[i] = 'Y';
-            } else {
+            }
+        }
+        for (int i = 0; i < guess.length(); i++) {
+            if (used[i] == false) {
                 resultRow[i] = '_';
             }
+        }            
             
-        }
 		// ...
 		// you may want to use containsChar in your implementation
     }
@@ -113,7 +116,7 @@ public class Wordle {
 
         // Prepare 2D arrays for guesses and results
         char[][] guesses = new char[MAX_ATTEMPTS] [WORD_LENGTH];
-        char[][] results = new char[1] [WORD_LENGTH];
+        char[][] results = new char[MAX_ATTEMPTS] [WORD_LENGTH];
 
         // Prepare to read from the standart input 
         In inp = new In();
