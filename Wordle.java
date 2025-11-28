@@ -22,7 +22,17 @@ public class Wordle {
 		int r = (int) (Math.random() * (dict.length - 1));
         String SecretWord = dict[r];
         return SecretWord;
-    } 
+    }
+
+    // chack if guess is in the dictionary
+    public static boolean inDict(String guess, String[] dict) {
+        for (int i = 0 ; i < dict.length; i++) {
+            if (dict[i].equals(guess)) {
+                return true;
+            }
+        } return false;
+
+    }
 
     // Simple helper: check if letter c appears anywhere in secret (true), otherwise
     // return false.
@@ -49,11 +59,13 @@ public class Wordle {
         for (int i = 0; i < guess.length(); i++) {
             if (containsChar(secret, guess.charAt(i)) == true && used[i] == false) {
                 resultRow[i] = 'Y';
+                used[i] = true;
             }
         }
         for (int i = 0; i < guess.length(); i++) {
             if (used[i] == false) {
                 resultRow[i] = '_';
+                used[i] = true;
             }
         }            
             
@@ -134,7 +146,7 @@ public class Wordle {
                 System.out.print("Enter your guess (5-letter word): ");
                 guess = inp.readString();
                 
-                if (guess.length() != 5) {
+                if (guess.length() != 5 || !inDict(guess, dict)) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
                     valid = true;
