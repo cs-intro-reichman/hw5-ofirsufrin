@@ -38,15 +38,21 @@ public class Wordle {
     // Compute feedback for a single guess into resultRow.
     // G for exact match, Y if letter appears anywhere else, _ otherwise.
     public static void computeFeedback(String secret, String guess, char[] resultRow) {
+        boolean[] used = new boolean[5];
         for (int i = 0; i < guess.length(); i++) {
             if (guess.charAt(i) == secret.charAt(i)) {
                 resultRow[i] = 'G';
+                used[i] = true;
             }
-            if (containsChar(secret, guess.charAt(i)) == true && resultRow[i] != 'G') {
+        }
+
+        for (int i = 0; i < guess.length(); i++) {
+            if (containsChar(secret, guess.charAt(i)) == true && used[i] == false) {
                 resultRow[i] = 'Y';
             } else {
                 resultRow[i] = '_';
             }
+            
         }
 		// ...
 		// you may want to use containsChar in your implementation
@@ -125,7 +131,7 @@ public class Wordle {
                 System.out.print("Enter your guess (5-letter word): ");
                 guess = inp.readString();
                 
-                if (guess.length() != 0) {
+                if (guess.length() != 5) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
                     valid = true;
